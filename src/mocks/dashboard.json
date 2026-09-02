@@ -1,0 +1,67 @@
+{
+  "kpis": [
+    {
+      "label": "ACTIVE ASSETS",
+      "value": "128",
+      "description": "Currently monitored",
+      "icon": "mdi-access-point",
+      "trend": "+4.2%"
+    },
+    {
+      "label": "OPERATIONAL ZONES",
+      "value": "25",
+      "description": "Across active sectors",
+      "icon": "mdi-map-marker-radius-outline",
+      "trend": "+2"
+    },
+    {
+      "label": "ACTIVE ALERTS",
+      "value": "07",
+      "description": "Requires attention",
+      "icon": "mdi-alert-outline",
+      "trend": "-12%"
+    },
+    {
+      "label": "SYSTEM UPTIME",
+      "value": "99.98%",
+      "description": "Last 30 days",
+      "icon": "mdi-server-outline",
+      "trend": "STABLE"
+    }
+  ],
+
+  "activity": [
+    {
+      "time": "00:00",
+      "value": 32
+    },
+    {
+      "time": "04:00",
+      "value": 48
+    },
+    {
+      "time": "08:00",
+      "value": 71
+    },
+    {
+      "time": "12:00",
+      "value": 56
+    },
+    {
+      "time": "16:00",
+      "value": 84
+    },
+    {
+      "time": "20:00",
+      "value": 63
+    }
+  ],
+
+  "threats": { 
+    "low": 82,
+    "medium": 48,
+    "high": 21
+  },
+
+  "lastSync": "18:06:42"
+}
