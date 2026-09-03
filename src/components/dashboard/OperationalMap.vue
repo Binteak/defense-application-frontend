@@ -108,7 +108,8 @@ const pulseMarker = (marker, color) => {
 const loadLocations = async () => {
   try {
     const response = await fetch(
-      'http://127.0.0.1:8003/api/locations/'
+    //   'http://127.0.0.1:8003/api/locations/'
+      'https://defense-application-backend.onrender.com/api/locations/'
     )
 
     if (!response.ok) {
