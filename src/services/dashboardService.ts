@@ -15,15 +15,63 @@
 
 
 
-import { environment } from '../environments/environment'
+// import { environment } from '../environments/environment'
+
+// interface DashboardData {
+//   // aquí pondremos los campos de tu dashboard
+// }
+
+// export async function getDashboardData(): Promise<DashboardData> {
+//   const response = await fetch(
+//     `${environment.apiUrl}/dashboard/`
+//   )
+
+//   if (!response.ok) {
+//     throw new Error('Error loading dashboard')
+//   }
+
+//   return await response.json()
+// }
+
+
+
 
 interface DashboardData {
-  // aquí pondremos los campos de tu dashboard
+  kpis: Array<{
+    label?: string
+    title?: string
+    value: string | number
+    [key: string]: unknown
+  }>
+
+  activity: unknown
+
+  locations: Array<{
+    id?: number
+    name?: string
+    status?: string
+    lat?: number
+    lng?: number
+    direction?: number
+    speed?: number
+    [key: string]: unknown
+  }>
+
+  threats: {
+    low?: number
+    medium?: number
+    high?: number
+    [key: string]: unknown
+  }
+
+  lastSync: string
 }
+
+const API_URL = import.meta.env.VITE_API_URL
 
 export async function getDashboardData(): Promise<DashboardData> {
   const response = await fetch(
-    `${environment.apiUrl}/dashboard/`
+    `${API_URL}/dashboard/`
   )
 
   if (!response.ok) {
