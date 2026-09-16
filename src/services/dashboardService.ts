@@ -10,14 +10,24 @@
 
 //It works!
 // const API_URL = 'http://127.0.0.1:8003/api'
-const API_URL = 'https://defense-application-backend.onrender.com/api'
 
 
-export async function getDashboardData() {
-  const response = await fetch(`${API_URL}/dashboard/`)
+
+
+
+import { environment } from '../environments/environment'
+
+interface DashboardData {
+  // aquí pondremos los campos de tu dashboard
+}
+
+export async function getDashboardData(): Promise<DashboardData> {
+  const response = await fetch(
+    `${environment.apiUrl}/dashboard/`
+  )
 
   if (!response.ok) {
-    throw new Error('Error loading dashboard data')
+    throw new Error('Error loading dashboard')
   }
 
   return await response.json()

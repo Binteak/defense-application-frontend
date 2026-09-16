@@ -3,12 +3,27 @@ import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 import tailwindcss from '@tailwindcss/vite'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     vue(),
-    vuetify({
-      autoImport: true
-    }),
+
+    ...(mode !== 'test'
+      ? [
+          vuetify({
+            autoImport: true
+          })
+        ]
+      : []),
+
     tailwindcss()
-  ]
-})
+  ],
+
+  test: {
+    environment: 'jsdom',
+
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html']
+    }
+  }
+}))

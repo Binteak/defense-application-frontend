@@ -1,4 +1,5 @@
 <script setup>
+// Importamos las propiedades que recibirá el componente
 defineProps({
   label: {
     type: String,
@@ -23,11 +24,19 @@ defineProps({
   trend: {
     type: String,
     default: ''
+  },
+
+  trendType: {
+    type: String,
+    default: 'positive'
   }
 })
+
 </script>
 
+
 <template>
+
   <div class="kpi-card">
 
     <div class="kpi-header">
@@ -45,9 +54,11 @@ defineProps({
 
     </div>
 
+
     <div class="kpi-value">
       {{ value }}
     </div>
+
 
     <div class="kpi-footer">
 
@@ -58,6 +69,7 @@ defineProps({
       <span
         v-if="trend"
         class="kpi-trend"
+        :class="`trend-${trendType}`"
       >
         {{ trend }}
       </span>
@@ -65,9 +77,12 @@ defineProps({
     </div>
 
   </div>
+
 </template>
 
+
 <style scoped>
+
 .kpi-card {
   position: relative;
 
@@ -88,10 +103,12 @@ defineProps({
     transform 0.2s ease;
 }
 
+
 .kpi-card:hover {
   border-color: rgba(124, 255, 107, 0.18);
   transform: translateY(-1px);
 }
+
 
 .kpi-header {
   display: flex;
@@ -99,14 +116,16 @@ defineProps({
   justify-content: space-between;
 }
 
+
 .kpi-label {
-  color: #52525b;
+  color: #71717a;
 
   font-size: 9px;
   font-weight: 700;
 
   letter-spacing: 0.16em;
 }
+
 
 .kpi-icon {
   width: 30px;
@@ -123,6 +142,7 @@ defineProps({
   background: rgba(124, 255, 107, 0.055);
 }
 
+
 .kpi-value {
   margin-top: 14px;
 
@@ -134,6 +154,7 @@ defineProps({
   letter-spacing: -0.04em;
 }
 
+
 .kpi-footer {
   display: flex;
   align-items: center;
@@ -142,16 +163,37 @@ defineProps({
   margin-top: 8px;
 }
 
+
 .kpi-description {
-  color: #3f3f46;
+  color: #52525b;
 
   font-size: 9px;
 }
 
-.kpi-trend {
-  color: #7cff6b;
 
+.kpi-trend {
   font-size: 9px;
   font-weight: 600;
 }
+
+
+.trend-positive {
+  color: #7cff6b;
+}
+
+
+.trend-negative {
+  color: #ff5c5c;
+}
+
+
+.trend-warning {
+  color: #facc15;
+}
+
+
+.trend-stable {
+  color: #a1a1aa;
+}
+
 </style>
