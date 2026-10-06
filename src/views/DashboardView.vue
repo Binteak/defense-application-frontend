@@ -69,83 +69,104 @@ null
 
 
 //Cargar Dashboard
-const loadDashboard =
-  async () => {
+// const loadDashboard =
+//   async () => {
 
-    try {
+//     try {
 
-      const data =
-        await getDashboardData() // LLamamos al servicio de Dashboard
+//       const data =
+//         await getDashboardData() // LLamamos al servicio de Dashboard
 
-      kpis.value =
-        data.kpis
+//       kpis.value =
+//         data.kpis
 
-      locations.value =
-        data.locations
+//       locations.value =
+//         data.locations
 
-      threats.value =
-        data.threats
+//       threats.value =
+//         data.threats
 
-      lastSync.value =
-        data.lastSync
+//       lastSync.value =
+//         data.lastSync
 
-      activity.value.push(
-        data.activity
-      )
+//       activity.value.push(
+//         data.activity
+//       )
 
 
-      // Limitar el tamaño del array de actividad a 12 elementos
-      if (
-        activity.value.length > 12
-      ) {
+//       // Limitar el tamaño del array de actividad a 12 elementos
+//       if (
+//         activity.value.length > 12
+//       ) {
 
-        activity.value.shift() // Eliminar el primer elemento
+//         activity.value.shift() // Eliminar el primer elemento
 
-      }
+//       }
 
-      // Limpiar cualquier error previo
-      error.value =
-        null
+//       // Limpiar cualquier error previo
+//       error.value =
+//         null
 
+//     }
+
+//     catch (err) { // Manejamos los errores de la solicitud
+
+//       console.error(
+//         'Error loading dashboard:',
+//         err
+//       )
+
+
+//       error.value =
+//         'Unable to load dashboard data'
+
+//     }
+
+//     finally { // Siempre se ejecuta, independientemente de si hubo un error o no
+
+//       loading.value =
+//         false
+
+//     }
+
+//   }
+
+const loadDashboard = async () => {
+  try {
+    const data = await getDashboardData()
+
+    kpis.value = data.kpis
+    locations.value = data.locations
+    threats.value = data.threats
+    lastSync.value = data.lastSync
+
+    activity.value.push(data.activity)
+
+    if (activity.value.length > 12) {
+      activity.value.shift()
     }
 
-    catch (err) { // Manejamos los errores de la solicitud
-
-      console.error(
-        'Error loading dashboard:',
-        err
-      )
-
-
-      error.value =
-        'Unable to load dashboard data'
-
-    }
-
-    finally { // Siempre se ejecuta, independientemente de si hubo un error o no
-
-      loading.value =
-        false
-
-    }
-
-  }
-
-onMounted(async () => {
-
-  //Cargamos el dashboard al montar el componente
-  await loadDashboard()
-
-  // Configuramos un intervalo para actualizar el dashboard cada 5 segundos
-  updateInterval =
-    setInterval(
-
-      loadDashboard,
-
-      5000
-
+    error.value = null
+  } catch (err) {
+    console.error(
+      'Error loading dashboard:',
+      err
     )
 
+    error.value =
+      'Unable to load dashboard data'
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(() => {
+  loadDashboard()
+
+  updateInterval = setInterval(
+    loadDashboard,
+    5000
+  )
 })
 
 
@@ -171,6 +192,30 @@ onBeforeUnmount(() => {
 
   <div class="dashboard">
 
+    <!-- ===================================================
+         LOADING
+         =================================================== -->
+
+    <div
+      v-if="loading"
+      class="dashboard-loading"
+    >
+
+      <div class="loading-box">
+
+        <v-progress-circular
+          indeterminate
+          size="28"
+          width="2"
+        />
+
+        <span>
+          SYNCING OPERATIONAL DATA...
+        </span>
+
+      </div>
+
+    </div>
 
     <!-- ===================================================
          HEADER
@@ -503,6 +548,36 @@ onBeforeUnmount(() => {
   padding:
     34px 38px 50px;
 
+  position: relative;
+
+}
+
+.dashboard-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding-top: 220px;
+
+  background: rgba(9, 9, 11, 0.82);
+  backdrop-filter: blur(3px);
+}
+
+.loading-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  color: #71717a;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
 

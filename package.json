@@ -12,12 +12,14 @@
     "test:coverage:open": "vitest run --coverage && start coverage/index.html"
   },
   "dependencies": {
+    "@google/genai": "^2.23.0",
     "@mdi/font": "^7.4.47",
     "@tailwindcss/vite": "^4.3.3",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "axios": "^1.20.0",
     "chart.js": "^4.5.1",
     "leaflet": "^1.9.4",
+    "livekit-client": "^2.22.3",
     "tailwindcss": "^4.3.3",
     "vue": "^3.5.41",
     "vue-chartjs": "^5.3.4",

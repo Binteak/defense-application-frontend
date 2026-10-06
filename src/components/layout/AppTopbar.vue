@@ -1,5 +1,17 @@
 <script setup>
 import SystemStatus from './SystemStatus.vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const currentScreen = computed(() => {
+  const name = route.name === 'dashboard' ? 'Overview' : route.name
+
+  return name
+    ? name.charAt(0).toUpperCase() + name.slice(1)
+    : ''
+})
 </script>
 
 <template>
@@ -23,7 +35,7 @@ import SystemStatus from './SystemStatus.vue'
         </div>
 
         <div class="current">
-          Command Center
+          {{ currentScreen }}
         </div>
 
       </div>

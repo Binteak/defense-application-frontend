@@ -13,6 +13,12 @@ const navigation = [
     route: '/operations'
   },
   {
+    title: 'Room',
+    subtitle: 'WebSockets',
+    icon: 'mdi-map-outline',
+    route: '/room'
+  },
+  {
     title: 'Intelligence',
     subtitle: 'Reports & events',
     icon: 'mdi-brain',
